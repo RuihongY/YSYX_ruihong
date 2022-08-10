@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "Vswitch.h"
-#include <verilated_vcd_c.h>
+#include "verilated_vcd_c.h"
 
 vluint64_t sc_time = 0;
 double sc_time_stamp()
@@ -16,9 +16,9 @@ int main(int argc, char** argv, char** env){
 	Verilated::traceEverOn(true);
 	VerilatedVcdC* m_trace = new VerilatedVcdC;
 	Vswitch* top = new Vswitch{contextp};
-	top->trace(m_trace,0);
+	top->trace(m_trace,5);
 	m_trace->open("waveform.vcd");
-	while(sc_time_stamp() < 20 && !contextp->gotFinish()){
+	while(sc_time_stamp() < 50 && !contextp->gotFinish()){
 		int a = rand() & 1;
 		int b = rand() & 1;
 		top->a = a;
